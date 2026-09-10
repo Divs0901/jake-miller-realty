@@ -61,18 +61,24 @@ Hills Dr"` and the bot acknowledges the listing and includes it in the lead.
 ## Conversation flow
 
 ```
-Bot:  Hey! Looking to buy or sell in Austin?
+Bot:  Hi! I'm Jake's assistant. Jake's usually out at showings, so I take
+      first questions. Looking to buy or sell in Austin?
       [Buy] [Sell] [Just browsing]
 Bot:  Great! What's your budget range?
       [$200k–400k] [$400k–700k] [$700k+]
 Bot:  Perfect. Can I grab your name and number so Jake can reach out within the hour?
       (name) (phone) ➜
-Bot:  Done! Jake typically responds in under 60 seconds. Check your phone.
-      ✓ Jake has been notified.   ← POST /api/lead fired
+Bot:  Got it, Sam — Jake's with a client right now, but he'll call you within
+      the hour. While you wait, three things worth thinking about:
+Bot:  1. Are you pre-approved? ...   ← tips vary by Buy / Sell / browsing
+      ✓ Jake has been notified.      ← POST /api/lead fired
 ```
 
-The "Sell" branch swaps the budget question for "what do you expect your home
-to sell for?" Edit wording in `lib/chat-flow.ts`.
+The bot is framed as Jake's assistant, not Jake — it says so in its first
+line. The "Sell" branch swaps the budget question for "what do you expect your
+home to sell for?" and gets seller tips. The tips deliberately never
+characterize neighborhoods (safety, schools, who lives there); that's steering
+under the Fair Housing Act. Edit wording in `lib/chat-flow.ts`.
 
 ## Loom script (about 75 seconds)
 
@@ -80,7 +86,9 @@ to sell for?" Edit wording in `lib/chat-flow.ts`.
    right." Wait for the nudge bubble to appear (2.5s).
 2. **0:10** Click it. Pick **Buy**, then **$400k–700k**.
 3. **0:25** Type a name and your own phone number. Hit send.
-4. **0:35** Bot says "Done! Jake typically responds in under 60 seconds."
+4. **0:35** Bot says "Jake's with a client right now, but he'll call you within
+   the hour" and gives three things to think about. "The visitor stays warm;
+   the agent stays at the showing."
 5. **0:40** Switch to your inbox. The email is already there with call and text
    buttons. "That's the lead, qualified, in the agent's pocket before the
    visitor has scrolled down."

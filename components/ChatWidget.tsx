@@ -196,7 +196,8 @@ export function ChatWidget() {
       .then((r) => r.ok)
       .catch(() => false);
 
-    await botSay(script.done, 1100);
+    await botSay(script.done(cleanName), 1100);
+    await botSay(script.tips(intent ?? "Just browsing"), 900);
     setStep("done");
 
     const ok = await notify;
@@ -243,7 +244,7 @@ export function ChatWidget() {
             <span className="block text-xs font-semibold text-ink/60">
               Jake Miller
             </span>
-            <span className="text-ink">{script.greeting}</span>
+            <span className="text-ink">{script.nudge}</span>
           </span>
           <span
             role="button"
@@ -413,7 +414,7 @@ function Bubble({ message }: { message: Message }) {
       <div
         className={
           isBot
-            ? "max-w-[85%] rounded-2xl rounded-bl-md bg-white px-4 py-2.5 text-sm text-ink shadow-sm ring-1 ring-stone"
+            ? "max-w-[85%] whitespace-pre-line rounded-2xl rounded-bl-md bg-white px-4 py-2.5 text-sm text-ink shadow-sm ring-1 ring-stone"
             : "max-w-[85%] rounded-2xl rounded-br-md bg-ink px-4 py-2.5 text-sm text-white"
         }
       >
